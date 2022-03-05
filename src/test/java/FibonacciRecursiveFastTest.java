@@ -1,11 +1,11 @@
 import org.junit.jupiter.api.BeforeAll;
 
-class FibonacciRecusiveLinearTest implements FibonacciTest{
+class FibonacciRecursiveFastTest implements FibonacciTest{
     static private Fibonacci fibonacci;
 
     @BeforeAll
     static void create(){
-        fibonacci = new FibonacciRecusiveLinear();
+        fibonacci = new FibonacciRecursiveFast();
     }
 
     @Override

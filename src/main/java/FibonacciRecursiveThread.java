@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.security.InvalidAlgorithmParameterException;
 
 public class FibonacciRecursiveThread extends Thread implements Fibonacci{
     private int number;
@@ -13,8 +14,10 @@ public class FibonacciRecursiveThread extends Thread implements Fibonacci{
 
     // API Fibonacci
     @Override
-    public BigInteger compute(int n) {
+    public BigInteger compute(int n) throws InvalidAlgorithmParameterException {
+        checkNotNegative(n);
         this.number = n;
+        this.result = null;
         run();
         return result;
     }
@@ -30,8 +33,8 @@ public class FibonacciRecursiveThread extends Thread implements Fibonacci{
             }else {
                 FibonacciRecursiveThread less1 = new FibonacciRecursiveThread(number - 1);
                 FibonacciRecursiveThread less2 = new FibonacciRecursiveThread(number - 2);
-                less1.run();
-                less2.run();
+                less1.start();
+                less2.start();
                 try {
                     less1.join();
                     less2.join();
